@@ -1,21 +1,24 @@
-# reverb-magento [TrackStreet] (https://www.trackstreet.com) Reverb extension for Magento
+# reverb-magento - Reverb extension for Magento
 
 ---
 
 The Magento extension that allows you to connect your store to the Reverb marketing platform.
 
+Extension built by [TrackStreet](https://www.trackstreet.com) 
+
 ---
 
 ## Requirements
-Magento 2.0+ (Up to module verion 2.4.5)
-Magento 2.1+ (Module version 2.7.5 up to 2.7.7)
-Magento 2.2+ (Module version 2.8.0 and above)
+
+* magento/framework: 102.0.*
+* magento/module-sales
+* magento/module-checkout
 
 ## Install via [composer](https://getcomposer.org/download/) (recommended)
 Run the following command under your Magento 2 root directory:
 
 ```
-composer require TrackStreetPlatform/reverb-magento
+composer require trackstreetplatform/reverb-magento
 php bin/magento maintenance:enable
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
@@ -26,7 +29,7 @@ php bin/magento cache:clean
 
 ## Usage
 
-For support on this extension, please reach out to support@trackstreet.com
+For support on this extension, please reach out to christophe@trackstreet.com
 
 
 ---
