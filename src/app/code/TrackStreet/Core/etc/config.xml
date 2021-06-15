@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <trackstreet>
+            <settings>
+                <enable>0</enable>
+                <referral_program_uuid></referral_program_uuid>
+                <store_uuid></store_uuid>
+            </settings>
+        </trackstreet>
+    </default>
+</config>

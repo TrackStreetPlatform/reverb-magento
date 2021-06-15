@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="TrackStreet\Integration\Api\ReverbServiceInterface" type="TrackStreet\Integration\Model\Api\V1\Client" />
+
+    <virtualType name="TrackStreet\Integration\Model\Customer" type="TrackStreet\Integration\Model\AbstractApiModel">
+        <arguments>
+            <argument name="idField" xsi:type="string">email</argument>
+            <argument name="actions" xsi:type="array">
+                <item name="default" xsi:type="string">customers</item>
+                <item name="load" xsi:type="string">customers/:store_uid:</item>
+            </argument>
+            <argument name="actionEntity" xsi:type="string">customer</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="TrackStreet\Integration\Model\Order" type="TrackStreet\Integration\Model\AbstractApiModel">
+        <arguments>
+            <argument name="idField" xsi:type="string">uid</argument>
+            <argument name="actions" xsi:type="array">
+                <item name="default" xsi:type="string">orders</item>
+            </argument>
+            <argument name="actionEntity" xsi:type="string">order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="TrackStreet\Integration\Observer\Customer\Save">
+        <arguments>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Customer</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Customer</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Customer</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Observer\Customer\Delete">
+        <arguments>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Customer</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Customer</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Customer</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Observer\Order\Save">
+        <arguments>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Order</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Order</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Order</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Observer\Order\Place">
+        <arguments>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Order</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Order</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Order</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Observer\Order\Delete">
+        <arguments>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Order</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Order</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Order</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Logger\Handler\ReverbApiHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="TrackStreet\Integration\Logger\ReverbApiLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">reverbApiLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">TrackStreet\Integration\Logger\Handler\ReverbApiHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="TrackStreet\Integration\Model\EntityProcessor\Customer" type="TrackStreet\Integration\Model\EntityProcessor\AbstractEntityProcessor">
+        <arguments>
+            <argument name="modelClassName" xsi:type="object">Magento\Customer\Model\Customer</argument>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Customer</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Customer</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Customer</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="TrackStreet\Integration\Model\EntityProcessor\Order" type="TrackStreet\Integration\Model\EntityProcessor\AbstractEntityProcessor">
+        <arguments>
+            <argument name="modelClassName" xsi:type="object">Magento\Sales\Model\Order</argument>
+            <argument name="apiModel" xsi:type="object">TrackStreet\Integration\Model\Order</argument>
+            <argument name="apiModelDataConverter" xsi:type="object">TrackStreet\Integration\Model\Converter\Order</argument>
+            <argument name="uidSaver" xsi:type="object">TrackStreet\Integration\Model\UidSaver\Order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="TrackStreet_Integration::SyncCommand" xsi:type="object">TrackStreet\Integration\Console\Command\SyncCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

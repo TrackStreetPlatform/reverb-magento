@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+/**
+ * @var $block \TrackStreet\Core\Block\Success
+ */
+$order = $block->getOrder();
+?>
+<?php if($block->getSettings()->isEnabled() && $block->getSettings()->getReferralProgramUuid()):?>
+<!-- Begin Reverb integration code -->
+<script type="text/javascript">
+
+    var _reverbq = _reverbq || [];
+
+    _reverbq.push(['init', {
+        referral_program_uuid: '<?=$block->escapeHtml($block->getSettings()->getReferralProgramUuid())?>',
+        server: '<?=$block->escapeUrl($block->getSettings()->getWidgetServerUrl())?>'
+    }]);
+
+    var _reverb_order_items = [];
+
+    <?php
+    /**
+     * @var $item \Magento\Sales\Model\Order\Item
+     */
+    ?>
+    /** Order Items **/
+    <?php foreach ($order->getAllVisibleItems() as $item):?>
+    _reverb_order_items.push({
+        /** Item Product ID **/
+        product_id: '<?=$block->escapeHtml($item->getSku())?>',
+        /** Item Unit Price **/
+        price: '<?=$block->escapeHtml($item->getPrice())?>',
+        /** Item Quantity **/
+        quantity: '<?=$block->escapeHtml($item->getQtyOrdered())?>',
+        /** Name of product **/
+        title: '<?=$block->escapeHtml($item->getName())?>',
+        /** URL for product **/
+        url: '<?=$block->escapeHtml($item->getProduct()->getProductUrl())?>',
+        /** URL for product image **/
+        image_url: '<?=$block->escapeUrl($block->getImageUrl($item->getProduct()))?>'
+    });
+    <?php endforeach; ?>
+
+    var _reverb_order_details = {
+        order_date: '<?=$block->escapeHtml($order->getCreatedAt())?>',
+        order_number: '<?=$block->escapeHtml($order->getIncrementId())?>',
+        email: '<?=$block->escapeHtml($order->getCustomerEmail())?>',
+        subtotal: '<?=$block->escapeHtml($order->getSubtotal())?>',
+        <?php if($order->getCouponCode()):?>
+        coupon_code: '<?=$block->escapeHtml($order->getCouponCode())?>',
+        <?php endif;?>
+        <?php if(!$order->getCustomerIsGuest()):?>
+        customer_id: '<?=$block->escapeHtml($order->getCustomerId())?>',
+        <?php endif;?>
+        items: _reverb_order_items,
+        first_name: '<?=$block->escapeHtml($order->getCustomerFirstname())?>',
+        last_name: '<?=$block->escapeHtml($order->getCustomerLastname())?>',
+    };
+
+    _reverbq.push(['register_purchase', _reverb_order_details]);
+
+</script>
+<script src="<?= $block->escapeUrl($block->getSettings()->getScriptUrl()) ?>" type="text/javascript"></script>
+<!-- End Reverb integration code -->
+<?php endif;?>

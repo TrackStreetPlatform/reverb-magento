@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="reverb" type="host">*.trackstreet.com</value>
+                <value id="demdex" type="host">https://dpm.demdex.net/</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="reverb" type="host">*.trackstreet.com</value>
+                <value id="demdex" type="host">https://dpm.demdex.net/</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="reverb" type="host">*.trackstreet.com</value>
+                <value id="omtrdc" type="host">https://amcglobal.sc.omtrdc.net/</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="reverb" type="host">*.trackstreet.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

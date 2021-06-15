@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_save_after">
+        <observer name="TrackStreet_Integration::CustomerSave" instance="TrackStreet\Integration\Observer\Customer\Save" />
+    </event>
+    <event name="customer_delete_before">
+        <observer name="TrackStreet_Integration::CustomerDelete" instance="TrackStreet\Integration\Observer\Customer\Delete" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="TrackStreet_Integration::OrderPlace" instance="TrackStreet\Integration\Observer\Order\Place" />
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="TrackStreet_Integration::OrderSave" instance="TrackStreet\Integration\Observer\Order\Save" />
+    </event>
+    <event name="sales_order_delete_after">
+        <observer name="TrackStreet_Integration::OrderDelete" instance="TrackStreet\Integration\Observer\Order\Delete" />
+    </event>
+</config>

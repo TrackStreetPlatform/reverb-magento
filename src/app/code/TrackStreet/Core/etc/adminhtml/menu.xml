@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © TrackStreet, Inc. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="TrackStreet_Core::admin" title="TrackStreet, Inc." translate="title" module="TrackStreet_Core"
+             sortOrder="40" parent="Magento_Backend::marketing" resource="TrackStreet_Core::admin"/>
+        <add id="TrackStreet_Core::admin_dashboard" title="Dashboard" translate="title" module="TrackStreet_Core"
+             sortOrder="10" parent="TrackStreet_Core::admin" action="trackstreet/reverb" resource="TrackStreet_Core::dashboard"/>
+        <add id="TrackStreet_Core::admin_configuration" title="Configuration" translate="title" module="TrackStreet_Core"
+             sortOrder="20" parent="TrackStreet_Core::admin" action="admin/system_config/edit/section/trackstreet" resource="TrackStreet_Core::dashboard"/>
+    </menu>
+</config>
