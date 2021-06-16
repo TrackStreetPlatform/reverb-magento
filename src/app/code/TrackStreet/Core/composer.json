@@ -9,12 +9,7 @@
             "homepage": "https://www.trackstreet.com/"
         }
     ],
-    "version": "1.1",
-    "require": {
-        "magento/framework": "102.0.*",
-        "magento/module-sales": "*",
-        "magento/module-checkout": "*"
-    },
+    "version": "1.2",
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
