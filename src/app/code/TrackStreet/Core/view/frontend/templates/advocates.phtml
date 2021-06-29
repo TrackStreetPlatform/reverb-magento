@@ -19,10 +19,10 @@ _reverbq.push(['init', {
 
 var _reverb_customer_details = {
     <?php if ($block->isLoggedIn()): ?>
-        email: '<?php echo $block->escapeHtml($block->getCustomerEmail()); ?>',
-        first_name: '<?php echo $block->escapeHtml($block->getCustomerFirstName()); ?>',
-        last_name: '<?php echo $block->escapeHtml($block->getCustomerlastName()); ?>',
-        phone_number: '<?php echo $block->escapeHtml($block->getCustomerPhoneNumber()); ?>',
+        <?php if ($block->getCustomerEmail() !== '' && !empty($block->getCustomerEmail())): ?>email: '<?php echo $block->escapeHtml($block->getCustomerEmail()); ?>',<?php endif; ?>
+        <?php if ($block->getCustomerFirstName() !== '' && !empty($block->getCustomerFirstName())): ?>first_name: '<?php echo $block->escapeHtml($block->getCustomerFirstName()); ?>',<?php endif; ?>
+        <?php if ($block->getCustomerLastName() !== '' && !empty($block->getCustomerLastName())): ?>last_name: '<?php echo $block->escapeHtml($block->getCustomerLastName()); ?>',<?php endif; ?>
+        <?php if ($block->getCustomerPhoneNumber() !== '' && !empty($block->getCustomerPhoneNumber())): ?>phone_number: '<?php echo $block->escapeHtml($block->getCustomerPhoneNumber()); ?>',<?php endif; ?>
     <?php endif; ?>
     referral_program_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getReferralProgramUuid()); ?>',
     iframe: {width: '100%', height: '700px'},
