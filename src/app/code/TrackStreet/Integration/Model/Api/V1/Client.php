@@ -143,8 +143,10 @@ class Client implements \TrackStreet\Integration\Api\ReverbServiceInterface
      * @param array $config
      * @return array|bool|false|float|int|mixed|object|\Services_JSON_Error|string|void
      */
-    protected function send($config = []){
-        try {
+    protected function send($config = [])
+    {
+        try 
+        {
             $client = curl_init();
 
             $configDefault = [
@@ -154,31 +156,50 @@ class Client implements \TrackStreet\Integration\Api\ReverbServiceInterface
                 CURLOPT_CONNECTTIMEOUT => 10,
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_FOLLOWLOCATION => TRUE,
+                //CURLOPT_SSL_VERIFYHOST => 0,
+                //CURLOPT_SSL_VERIFYPEER => 0
             ];
 
             $this->reverbApiLogger->debug('Request: '.$config[CURLOPT_URL]);
-            if(isset($config[CURLOPT_POSTFIELDS])) {
+
+            if (isset($config[CURLOPT_POSTFIELDS])) 
+            {
                 $this->reverbApiLogger->debug('Request Body: ' . \json_encode($config[CURLOPT_POSTFIELDS]));
             }
-            foreach ($configDefault as $option => $value) {
+
+            foreach ($configDefault as $option => $value) 
+            {
                 curl_setopt($client, $option, $value);
             }
-            foreach ($config as $option => $value) {
+
+            foreach ($config as $option => $value) 
+            {
                 curl_setopt($client, $option, $value);
             }
+
             $result = curl_exec($client);
+            
             $this->reverbApiLogger->debug('Response: '.$result);
+            
             $result = \json_decode($result, true);
 
-            if (\json_last_error() !== JSON_ERROR_NONE) {
-                $result = ['response'=>['code'=>500,'message'=>\json_last_error_msg()]];
+            if (\json_last_error() !== JSON_ERROR_NONE) 
+            {
+                $result = [
+                    'response' => ['code' => 500, 'message' => \json_last_error_msg()]
+                ];
+
                 $this->reverbApiLogger->debug('ERROR: '.$result['response']['message']);
             }
 
-        } catch (\Exception $exception) {
+        } catch (\Exception $exception) 
+        {
             $result = ['response'=>['code'=>500,'message'=>$exception->getMessage()]];
+
             $this->reverbApiLogger->debug('ERROR: '.$exception->getMessage());
-        } finally {
+        } 
+        finally 
+        {
             curl_close($client);
         }
 

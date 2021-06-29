@@ -1,27 +1,38 @@
 <?php
 /**
  * Copyright © TrackStreet, Inc. All rights reserved.
+ * 
+ * @var \TrackStreet\Core\Block\View $block
  */
-/** @var \TrackStreet\Core\Block\View $block */
 ?>
-<?php if($block->getSettings()->isEnabled() && $block->getSettings()->getReferralProgramUuid()):?>
+<?php if ($block->getSettings()->isEnabled() && $block->getSettings()->getReferralProgramUuid()): ?>
+
 <!-- Begin Reverb integration code -->
 <script type="text/javascript">
-    var _reverbq = _reverbq || [];
-    _reverbq.push(['init', {
-        referral_program_uuid: '<?=$block->escapeHtml($block->getSettings()->getReferralProgramUuid())?>',
-        server: '<?=$block->escapeUrl($block->getSettings()->getWidgetServerUrl())?>'
-    }]);
-    var _reverb_customer_details = {
-        <?php if($block->isLoggedIn()):?>
-        email: '<?=$block->escapeHtml($block->getCustomerEmail())?>',
-        <?php endif?>
-        referral_program_uuid: '<?=$block->escapeHtml($block->getSettings()->getReferralProgramUuid())?>',
-        iframe: {width: '100%',height: '700px'},
-        responsive: true,
-    };
-    _reverbq.push(['customer_page', _reverb_customer_details]);
+
+var _reverbq = _reverbq || [];
+
+_reverbq.push(['init', {
+    referral_program_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getReferralProgramUuid()); ?>',
+    server: '<?php echo $block->escapeUrl($block->getSettings()->getWidgetServerUrl()); ?>'
+}]);
+
+var _reverb_customer_details = {
+    <?php if ($block->isLoggedIn()): ?>
+        email: '<?php echo $block->escapeHtml($block->getCustomerEmail()); ?>',
+        first_name: '<?php echo $block->escapeHtml($block->getCustomerFirstName()); ?>',
+        last_name: '<?php echo $block->escapeHtml($block->getCustomerlastName()); ?>',
+        phone_number: '<?php echo $block->escapeHtml($block->getCustomerPhoneNumber()); ?>',
+    <?php endif; ?>
+    referral_program_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getReferralProgramUuid()); ?>',
+    iframe: {width: '100%', height: '700px'},
+    responsive: true,
+};
+
+_reverbq.push(['customer_page', _reverb_customer_details]);
+
 </script>
-<script src="<?= $block->escapeUrl($block->getSettings()->getScriptUrl()) ?>" type="text/javascript"></script>
+<script src="<?php echo $block->escapeUrl($block->getSettings()->getScriptUrl()); ?>" type="text/javascript"></script>
 <!-- End Reverb integration code -->
+
 <?php endif; ?>

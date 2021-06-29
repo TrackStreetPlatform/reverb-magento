@@ -57,12 +57,46 @@ class View extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return int|null
+     * Get the customer's email address from the logged in customer object with Magento.
+     * 
+     * @author Christophe Sautot
+     * @return string
      */
     public function getCustomerEmail()
     {
         return $this->_customerSession->getCustomer()->getEmail();
     }
 
+    /**
+     * Get the customer's first name from the logged in customer object with Magento.
+     * 
+     * @author Christophe Sautot
+     * @return string
+     */
+    public function getCustomerFirstName()
+    {
+        return $this->_customerSession->getCustomer()->getFirstname();
+    }
 
+    /**
+     * Get the customer's last name from the logged in customer object with Magento.
+     * 
+     * @author Christophe Sautot
+     * @return string
+     */
+    public function getCustomerLastName()
+    {
+        return $this->_customerSession->getCustomer()->getLastname();
+    }
+
+    /**
+     * Get the customer's phone number from the logged in customer object with Magento.
+     * 
+     * @author Christophe Sautot
+     * @return string
+     */
+    public function getCustomerPhoneNumber()
+    {
+        return $this->_customerSession->getCustomer()->getTelephone();
+    }
 }
