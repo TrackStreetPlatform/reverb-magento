@@ -14,7 +14,7 @@
             <argument name="idField" xsi:type="string">email</argument>
             <argument name="actions" xsi:type="array">
                 <item name="default" xsi:type="string">customers</item>
-                <item name="load" xsi:type="string">customers/:store_uid:</item>
+                <item name="load" xsi:type="string">customers/:website_uuid:</item>
             </argument>
             <argument name="actionEntity" xsi:type="string">customer</argument>
         </arguments>

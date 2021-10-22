@@ -109,7 +109,7 @@ class Client implements \TrackStreet\Integration\Api\ReverbServiceInterface
      */
     protected function getActionUrl($action) 
     {
-        $action = str_replace(':store_uid:', $this->helper->getStoreUuid(), $action);
+        $action = str_replace(':website_uuid:', $this->helper->getWebsiteUuid(), $action);
 
         $reverb_api_domain_setting = $this->helper->getReverbAPIDomain();
 

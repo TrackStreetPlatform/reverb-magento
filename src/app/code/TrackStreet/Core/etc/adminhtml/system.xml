@@ -29,15 +29,15 @@
                     <label>Module Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="referral_program_uuid" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Referral Program UUID</label>
+                <field id="campaign_uuid" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Campaign UUID</label>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="enable">1</field>
                     </depends>
                 </field>
-                <field id="store_uuid" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Store UUID</label>
+                <field id="website_uuid" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Website UUID</label>
                     <depends>
                         <field id="enable">1</field>
                     </depends>

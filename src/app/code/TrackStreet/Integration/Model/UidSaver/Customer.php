@@ -34,10 +34,12 @@ class Customer implements UidSaverInterface
      */
     public function save($object, $reverbObject)
     {
-        if ($reverbObject->getUuid()) {
+        if ($reverbObject->getUuid()) 
+        {
             $object->setReverbUuid($reverbObject->getUuid());
             $customerResource = $this->customerFactory->create();
             $customerResource->saveAttribute($object, 'reverb_uuid');
+            
             return $this;
         }
     }

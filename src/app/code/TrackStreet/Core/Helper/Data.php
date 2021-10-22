@@ -29,17 +29,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @return mixed
      */
-    public function getReferralProgramUuid()
+    public function getCampaignUuid()
     {
-        return $this->scopeConfig->getValue(self::PATH . 'referral_program_uuid', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue(self::PATH . 'campaign_uuid', ScopeInterface::SCOPE_STORE);
     }
 
     /**
      * @return mixed
      */
-    public function getStoreUuid()
+    public function getWebsiteUuid()
     {
-        return $this->scopeConfig->getValue(self::PATH . 'store_uuid', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue(self::PATH . 'website_uuid', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -50,7 +50,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getScriptVersion() 
     {
-        return '1.05'; // Updated on 2021-06-02 by Christophe Sautot
+        return '1.10'; // Updated on 2021-10-22 by Christophe Sautot
     }
 
     /**

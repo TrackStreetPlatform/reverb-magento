@@ -1,6 +1,6 @@
 # reverb-magento - Reverb extension for Magento
 
-The Magento extension that allows you to connect your store to the Reverb marketing platform.
+The Magento extension that allows you to connect your website to the Reverb marketing platform.
 
 Extension built by [TrackStreet](https://www.trackstreet.com) 
 

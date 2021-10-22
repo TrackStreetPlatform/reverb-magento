@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © TrackStreet, Inc. All rights reserved.
  */
@@ -10,11 +11,11 @@ use Magento\Framework\DataObject;
 
 /**
  * Class Customer
+ * 
  * @package TrackStreet\Integration\Model\Converter
  */
 class Order extends AbstractApiModelDataConverter
 {
-
     /**
      * @var \Magento\Catalog\Helper\ImageFactory
      */
@@ -32,6 +33,7 @@ class Order extends AbstractApiModelDataConverter
 
     /**
      * Order constructor.
+     * 
      * @param \TrackStreet\Integration\Helper\Data $apiHelper
      * @param \Magento\Store\Model\App\Emulation $appEmulation
      * @param \Magento\Catalog\Helper\ImageFactory $imageFactory
@@ -57,20 +59,24 @@ class Order extends AbstractApiModelDataConverter
     public function convert($object)
     {
         $reverbOrderData = [
-            'store_uuid' => $this->apiHelper->getStoreUuid(),
+            'website_uuid' => $this->apiHelper->getWebsiteUuid(),
             'order_number' => $object->getIncrementId(),
             'subtotal' => $object->getSubtotal()
         ];
 
         $reverbOrderData = array_merge($object->getData(),$reverbOrderData);
 
-        if ($object->getReverbUuid()) {
+        if ($object->getReverbUuid()) 
+        {
             $reverbOrderData['uuid'] = $object->getReverbUuid();
         }
 
         $reverbOrderData['coupon_used'] = $object->getCouponCode() ? $object->getCouponCode() : '';
+        
         $reverbOrderItems = [];
-        foreach ($object->getAllVisibleItems() as $item) {
+
+        foreach ($object->getAllVisibleItems() as $item) 
+        {
             $reverbOrderItem = array_merge(
                 $item->getData(),
                 [
@@ -80,11 +86,16 @@ class Order extends AbstractApiModelDataConverter
                     'product_title' => $item->getName(),
                     'product_url' => $item->getProduct()->getProductUrl(),
                     'product_image_url' => $this->getImageUrl($item->getProduct()),
-                ]);
+                ]
+            );
+
             $reverbOrderItems[] = $reverbOrderItem;
         }
+
         $reverbOrderData['order_items'] = $reverbOrderItems;
+
         $reverbOrderData['customer_uuid'] = $this->getCustomerUuid($object);
+        
         return $reverbOrderData;
     }
 
@@ -94,10 +105,12 @@ class Order extends AbstractApiModelDataConverter
      */
     protected function getImageUrl($product)
     {
-        $this->appEmulation->startEnvironmentEmulation(0, \Magento\Framework\App\Area::AREA_FRONTEND, true);
-        $url =  $this->imageHelperFactory->create()
-            ->init($product, 'product_thumbnail_image')->getUrl();
+        $this->appEmulation->startEnvironmentEmulation(0, \Magento\Framework\App\Area::AREA_FRONTEND, TRUE);
+
+        $url =  $this->imageHelperFactory->create()->init($product, 'product_thumbnail_image')->getUrl();
+
         $this->appEmulation->stopEnvironmentEmulation();
+        
         return $url;
     }
 
@@ -107,19 +120,30 @@ class Order extends AbstractApiModelDataConverter
      */
     protected function getCustomerUuid($order)
     {
-        if (!$order->getCustomerIsGuest()) {
+        if (!$order->getCustomerIsGuest()) 
+        {
             $customer = $this->customerFactory->create()->load($order->getCustomerId());
-            if (!$customer->getData('reverb_uuid')) {
+
+            if (!$customer->getData('reverb_uuid')) 
+            {
                 $customer->save();
             }
+
             return $customer->getData('reverb_uuid');
-        } else {
+        } 
+        else 
+        {
             $reverbCustomer = $this->getObjectManager()->create('TrackStreet\Integration\Model\Customer');
+
             $reverbCustomer->load($order->getCustomerEmail());
-            if (!$reverbCustomer->getUuid()) {
+            
+            if (!$reverbCustomer->getUuid()) 
+            {
                 $dataConverter = $this->getObjectManager()->get('TrackStreet\Integration\Model\Converter\GuestCustomer');
+
                 $reverbCustomer->addData($dataConverter->convert($order))->save();
             }
+            
             return $reverbCustomer->getUuid();
         }
     }

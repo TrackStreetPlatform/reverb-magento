@@ -9,8 +9,8 @@
         <trackstreet>
             <settings>
                 <enable>0</enable>
-                <referral_program_uuid></referral_program_uuid>
-                <store_uuid></store_uuid>
+                <campaign_uuid></campaign_uuid>
+                <website_uuid></website_uuid>
             </settings>
         </trackstreet>
     </default>

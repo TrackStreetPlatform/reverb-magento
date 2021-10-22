@@ -16,12 +16,12 @@ class GuestCustomer extends AbstractApiModelDataConverter {
     public function convert($object)
     {
         $reverbCustomerData = [
-            'store_uuid' => $this->apiHelper->getStoreUuid(),
+            'website_uuid' => $this->apiHelper->getWebsiteUuid(),
             'email' => $object->getCustomerEmail(),
             'first_name' => $object->getCustomerFirstname(),
             'last_name' => $object->getCustomerLastname(),
             'tax_number' => $object->getCustomerTaxvat(),
-            'program_uuid' => $this->apiHelper->getReferralProgramUuid()
+            'campaign_uuid' => $this->apiHelper->getCampaignUuid()
         ];
 
         $address = $object->getShippingAddress();

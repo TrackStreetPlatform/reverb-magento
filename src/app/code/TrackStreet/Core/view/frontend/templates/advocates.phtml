@@ -5,7 +5,7 @@
  * @var \TrackStreet\Core\Block\View $block
  */
 ?>
-<?php if ($block->getSettings()->isEnabled() && $block->getSettings()->getReferralProgramUuid()): ?>
+<?php if ($block->getSettings()->isEnabled() && $block->getSettings()->getCampaignUuid()): ?>
 
 <!-- Begin Reverb integration code -->
 <script type="text/javascript">
@@ -13,7 +13,7 @@
 var _reverbq = _reverbq || [];
 
 _reverbq.push(['init', {
-    referral_program_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getReferralProgramUuid()); ?>',
+    campaign_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getCampaignUuid()); ?>',
     server: '<?php echo $block->escapeUrl($block->getSettings()->getWidgetServerUrl()); ?>'
 }]);
 
@@ -24,7 +24,7 @@ var _reverb_customer_details = {
         <?php if ($block->getCustomerLastName() !== '' && !empty($block->getCustomerLastName())): ?>last_name: '<?php echo $block->escapeHtml($block->getCustomerLastName()); ?>',<?php endif; ?>
         <?php if ($block->getCustomerPhoneNumber() !== '' && !empty($block->getCustomerPhoneNumber())): ?>phone_number: '<?php echo $block->escapeHtml($block->getCustomerPhoneNumber()); ?>',<?php endif; ?>
     <?php endif; ?>
-    referral_program_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getReferralProgramUuid()); ?>',
+    campaign_uuid: '<?php echo $block->escapeHtml($block->getSettings()->getCampaignUuid()); ?>',
     iframe: {width: '100%', height: '700px'},
     responsive: true,
 };
