@@ -62,7 +62,7 @@ class Information extends \Magento\Config\Block\System\Config\Form\Fieldset
      */
     private function _getWidgetVersion($fieldset)
     {
-        $label = __('Widget JS Version');
+        $label = __('Widget File Version');
         return $this->getFieldHtml($fieldset, 'widget_js_version', $label, $this->tsHelper->getScriptVersion());
     }
 
